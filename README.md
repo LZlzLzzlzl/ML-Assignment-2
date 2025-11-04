@@ -3,10 +3,10 @@
 #  Assignment 2: 手写体分类任务
 
 [![Python](https://img.shields.io/badge/Python-3.8-blue.svg)](https://www.python.org/)
-[![Deadline](https://img.shields.io/badge/Deadline-Nov%2010-red.svg)](http://101.132.193.95:3000)
+[![Deadline](https://img.shields.io/badge/Deadline-Nov%2017-red.svg)](http://101.132.193.95:3000)
 [![License](https://img.shields.io/badge/License-Educational-green.svg)](LICENSE)
 
-**📅 截止日期：11月10日** | **🏆 [查看排行榜](http://101.132.193.95:3000)**
+**📅 截止日期：11月17日** | **🏆 [查看排行榜](http://101.132.193.95:3000)**
 
 
 ---
@@ -169,7 +169,7 @@ array([[0.78 0.   0.64 0.   0.   0.42 0.   0.57 0.29 0.  ]
  ┗ 🪟 evaluate-win.exe       # Windows评测程序
 ```
 
-> 💡 **Baseline**: Logistic regression模型
+> 💡 **Baseline**: Logistic regression模型,你需要实现自己的SVM模型
 
 ---
 
@@ -177,7 +177,67 @@ array([[0.78 0.   0.64 0.   0.   0.42 0.   0.57 0.29 0.  ]
 
 ### 🎨 1. `model.py` - 模型类
 
+```python
+class Model:
+    def __init__(self):
+        """初始化模型所需参数、变量或结构（如权重、缓存等）"""
+
+
+    def fit(self, X, y):
+        """
+        模型训练函数
+
+        Args:
+            X: numpy数组, shape (n_samples,H,W)
+            y: numpy数组, shape (n_samples,)
+        Returns:
+            None
+        """
+        # 在此处实现模型训练逻辑（可自由设计模型结构与训练方式）
+
+
+    def predict(self, X):
+        """
+        模型预测函数
+
+        Args:
+            X: numpy数组, shape (n_samples, n_features)
+        Returns:
+            numpy数组, shape (n_samples,)
+        """
+        # 在此处实现推理逻辑，返回每个样本的预测类别
+        
+```
+
 ### 🚀 2. `solution.py` - 推理接口
+
+```python
+class Solution:
+    def __init__(self):
+        """初始化推理类，加载并训练模型"""
+        self.model = Model()
+        # 可在此加载训练好的模型参数或调用 self.model.fit() 进行训练
+        # 例如: self.model.fit(X_train, y_train)
+
+
+    def forward(self, sample: Dict[str, Any]) -> Dict[str, int]:
+        """模型推理接口，接收单条样本数据并返回预测结果
+        
+        Args:
+            sample: 单条样本数据，包含该样本的特征
+                      
+        Returns:
+            包含预测结果的字典，格式为: {'prediction': int(预测类别编号)}
+        """
+        # 1. 将样本转换为numpy数组（或其他模型可接受的格式）
+        x = np.array(list(sample.values()), dtype=float).reshape(1, -1)
+
+        # 2. 使用模型进行预测
+        y_pred = self.model.predict(x)
+
+        # 3. 返回预测输出
+        return {'prediction': int(y_pred[0])}
+```
 
 ---
 
@@ -303,7 +363,7 @@ evaluate-win.exe
 
 ### 🎉 祝你取得好成绩！
 
-**📅 记得在11月10日前提交你的最佳成绩！**
+**📅 记得在11月17日前提交你的最佳成绩！**
 
 ---
 
